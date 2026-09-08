@@ -1,5 +1,5 @@
 /**
- * ヘッダー・フッターに敷くアイコン帯（img/icon/strip.png）を組み立てる。
+ * ヘッダー・フッターに敷くアイコン帯（img2027/icon/strip.png）を組み立てる。
  *
  * 帯は1枚の画像を CSS の repeat-x で敷き詰めているので、
  * アイコンを足す・外す・順番を変えたときはこれを実行して作り直すこと。
@@ -13,7 +13,7 @@
 import sharp from "sharp";
 import { readFileSync, statSync } from "node:fs";
 
-const ICON_DIR = "img/icon";
+const ICON_DIR = "img2027/icon";
 const OUT = `${ICON_DIR}/strip.png`;
 
 const HEIGHT = 120; // 帯の内部解像度。CSS側は background-size:auto 100% で縮めて使う

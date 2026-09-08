@@ -10,11 +10,13 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="医療×ざっかふぇす2027｜2027年5月8日(土)開催決定！">
 <meta property="og:description" content="医療をテーマに個性豊かな雑貨やアクセサリーが大集合するクリエイティブマーケット。第3回は2027年5月8日(土)、都立産業貿易センター台東館にて開催決定。">
-<!-- TODO(Web担当): og:image はSNSシェア用。サーバーに上げたあとの絶対URLに直す -->
-<meta property="og:image" content="https://iryozakka.com/img/logo-2027.png">
+<!-- SNSでシェアされたときの画像。iryozakka.com のトップに置く前提のURL。
+     別の場所に置く場合はここを直す -->
+<meta property="og:image" content="https://iryozakka.com/img2027/logo-2027.png">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- TODO(Web担当): 2026サイトのGoogle Analytics(G-BKSBYPVXEP)は、必要なら本番差し替え時にここへ -->
+<!-- 未設置。2026サイトは Google Analytics (G-BKSBYPVXEP) を入れていた。
+     アクセス数を取るなら、そのタグをここに貼る -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,7 +77,7 @@ img{max-width:100%}
    sharp で height=120px・間隔26px・両端は半分の13pxとして繋ぎ目を揃えている）。 */
 .iconband{
   height:clamp(42px,5.4vw,68px);
-  background:url("img/icon/strip.png") repeat-x center center;
+  background:url("img2027/icon/strip.png") repeat-x center center;
   background-size:auto 100%;
 }
 .iconband--top{margin:calc(var(--gutter) * .7) 0}
@@ -147,17 +149,15 @@ img{max-width:100%}
 .f2{width:clamp(72px,9vw,150px);top:14%;right:-6%;transform:rotate(14deg)}
 .f5{width:clamp(88px,11vw,180px);bottom:-9%;left:-5%;transform:rotate(-18deg)}
 
-/* ざぶとんの背面から両端に覗く大輪。手前の3輪が角にいるので中腹に置く。
-   はみ出す量は自分の幅を基準に計算する（画面幅の%でやると花の大きさと
-   ずれて比率が崩れる）。58%出すと花の中心＝黄色い芯がざぶとんの外に来て、
-   花だと分かる。これ以下だと白い花びらしか見えず、ただの塊に見える。 */
-.fb{z-index:0}
-/* 上辺・下辺からは覗かせない（上は間延びして見え、下は人だかりと競合する）。
-   左右にだけ、高さをばらして並べる。手前の花（f1 上-6% / f2 上14% /
-   f5 下端）と高さが重ならないように配置すること。
+/* ざぶとんの背面から覗く大輪。上辺・下辺からは覗かせない（上は間延びして
+   見え、下は人だかりと競合する）。左右にだけ、高さをばらして並べる。
+   手前の花（f1 上-6% / f2 上14% / f5 下端）と高さが重ならないように置くこと。
 
-   はみ出し量は1輪ずつ変えている。全部を同じ値にすると黄色い芯が横一列に
-   同じ距離で並んで、規則的すぎて気持ち悪くなる。0.5を切ると芯が隠れる。 */
+   はみ出す量は自分の幅を基準に計算する（画面幅の%でやると花の大きさと
+   ずれて比率が崩れる）。0.5を超えると花の中心＝黄色い芯がざぶとんの外に来て
+   花だと分かる。それ以下だと白い花びらしか見えず、ただの塊に見える。
+   値は1輪ずつ変えてある。全部同じにすると芯が同じ距離に並んで規則的すぎる。 */
+.fb{z-index:0}
 .fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:34%;left:calc(var(--w) * -.54);transform:rotate(-14deg)}
 .fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:50%;right:calc(var(--w) * -.76);transform:rotate(20deg)}
 .fb3{--w:clamp(84px,12vw,210px);width:var(--w);top:68%;left:calc(var(--w) * -.66);transform:rotate(26deg)}
@@ -262,7 +262,7 @@ footer a.txt{color:var(--accent)}
 
 <main class="mv">
   <div class="cushion">
-    <img class="logo" src="img/logo-2027.png" alt="医療×ざっかふぇす 2027" width="1855" height="545">
+    <img class="logo" src="img2027/logo-2027.png" alt="医療×ざっかふぇす 2027" width="1855" height="545">
 
     <p class="badge">第3回 開催決定</p>
 
@@ -285,8 +285,8 @@ footer a.txt{color:var(--accent)}
 
     <a class="btn" href="https://x.com/iryozakka/" target="_blank" rel="noopener">続報を X で受け取る</a>
 
-    <img class="fs fs1" src="img/art/margaret-white.png" alt="" aria-hidden="true">
-    <img class="fs fs2" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
+    <img class="fs fs1" src="img2027/art/margaret-white.png" alt="" aria-hidden="true">
+    <img class="fs fs2" src="img2027/art/margaret-orange.png" alt="" aria-hidden="true">
   </div>
   <!-- 線画の色でグラデ上の並び順を決めている。
        左（ミント #9de5e0）にコーラルの線画、右（コーラルパステル #ffbdb5）に
@@ -294,23 +294,23 @@ footer a.txt{color:var(--accent)}
        中央のぴおすんは白基調なので黄色（#fbf4d0）の上に来るようにする。
        並べ替えるときはこの対応を崩さないこと。 -->
   <div class="crowd" aria-hidden="true">
-    <img class="fig-extra" src="img/art/helpmark.png" alt="">
-    <img src="img/art/mamatoko.png" alt="">
-    <img class="s-chibicos" src="img/art/chibicos.png" alt="">
-    <img class="piosun" src="img/piosun.png" alt="マスコットのぴおすん">
-    <img src="img/art/hiyorinmioshin.png" alt="">
-    <img src="img/art/pregnant-pair.png" alt="">
-    <img class="fig-extra" src="img/art/n-doc.png" alt="">
+    <img class="fig-extra" src="img2027/art/helpmark.png" alt="">
+    <img src="img2027/art/mamatoko.png" alt="">
+    <img class="s-chibicos" src="img2027/art/chibicos.png" alt="">
+    <img class="piosun" src="img2027/piosun.png" alt="マスコットのぴおすん">
+    <img src="img2027/art/hiyorinmioshin.png" alt="">
+    <img src="img2027/art/pregnant-pair.png" alt="">
+    <img class="fig-extra" src="img2027/art/n-doc.png" alt="">
   </div>
 
-  <img class="flower fb fb1" src="img/art/margaret-white.png" alt="" aria-hidden="true">
-  <img class="flower fb fb2" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
-  <img class="flower fb fb3" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
-  <img class="flower fb fb4" src="img/art/margaret-white.png" alt="" aria-hidden="true">
+  <img class="flower fb fb1" src="img2027/art/margaret-white.png" alt="" aria-hidden="true">
+  <img class="flower fb fb2" src="img2027/art/margaret-orange.png" alt="" aria-hidden="true">
+  <img class="flower fb fb3" src="img2027/art/margaret-orange.png" alt="" aria-hidden="true">
+  <img class="flower fb fb4" src="img2027/art/margaret-white.png" alt="" aria-hidden="true">
 
-  <img class="flower f1" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
-  <img class="flower f2" src="img/art/margaret-white.png" alt="" aria-hidden="true">
-  <img class="flower f5" src="img/art/margaret-white.png" alt="" aria-hidden="true">
+  <img class="flower f1" src="img2027/art/margaret-orange.png" alt="" aria-hidden="true">
+  <img class="flower f2" src="img2027/art/margaret-white.png" alt="" aria-hidden="true">
+  <img class="flower f5" src="img2027/art/margaret-white.png" alt="" aria-hidden="true">
 </main>
 
 <footer>
