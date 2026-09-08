@@ -56,8 +56,6 @@ body{
 img{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 
-/* ヘッダーエリア＝クリーム地。ざぶとんの外に「第3回 開催決定」を置く */
-.siteheader{padding:var(--gutter) 20px 0;text-align:center}
 
 /* ---------- グラデのざぶとん ----------
    ヘッダー・フッター以外＝コンテンツ全部がこの上に乗る。
@@ -99,7 +97,17 @@ img{max-width:100%}
 }
 .venue{margin:clamp(16px,2vw,24px) 0 0;font-size:clamp(18px,3.8vw,26px);line-height:1.5}
 .venue small{display:block;margin-top:6px;font-size:14px;color:var(--ink-soft)}
-.lead{margin:clamp(22px,2.6vw,32px) auto 0;max-width:640px;font-size:15px;line-height:2}
+/* キャッチ＝一番言いたいこと。2025サイトで日付の下にタグラインが入っていた位置 */
+.catch{
+  font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
+  font-weight:800;
+  margin:clamp(26px,3.2vw,40px) auto 0;max-width:26em;
+  font-size:clamp(20px,3.2vw,32px);line-height:1.6;
+}
+/* 2行を意図した割り方で固定する（自然折り返しだと語の途中で割れる） */
+.catch span,.catch em{display:block}
+.catch em{font-style:normal;color:var(--accent)}
+.lead{margin:clamp(14px,1.8vw,22px) auto 0;max-width:34em;font-size:clamp(15px,1.9vw,18px);line-height:1.95}
 
 /* ---------- ボタン（2026実測：角丸16px・影なし・480×48 / 24px太字） ---------- */
 .btn{
@@ -112,12 +120,14 @@ img{max-width:100%}
 }
 .btn:hover,.btn:focus-visible{background:var(--accent-sh)}
 
-/* バッジ（ヘッダー内） */
+/* バッジ。ロゴの「2027」と日付の「2027年」が隣り合って重複して見えるため、
+   間に挟んで切り分ける役目も持たせている */
 .badge{
-  display:inline-block;margin:0;
+  display:inline-block;
+  margin:clamp(18px,2.4vw,30px) auto 0;
   background:var(--accent);color:#fff;
-  padding:9px 28px;border-radius:16px;
-  font-size:15px;letter-spacing:.14em;
+  padding:clamp(10px,1.3vw,15px) clamp(24px,3.4vw,40px);border-radius:16px;
+  font-size:clamp(17px,2.4vw,24px);letter-spacing:.12em;
 }
 
 /* ---------- フッター ---------- */
@@ -135,13 +145,11 @@ footer a.txt{color:var(--accent)}
 </head>
 <body>
 
-<header class="siteheader">
-  <p class="badge">第3回 開催決定</p>
-</header>
-
 <main class="mv">
   <div class="cushion">
     <img class="logo" src="img/logo-2027.png" alt="医療×ざっかふぇす 2027" width="1855" height="545">
+
+    <p class="badge">第3回 開催決定</p>
 
     <p class="date">2027年5月8日(土)</p>
 
@@ -149,6 +157,11 @@ footer a.txt{color:var(--accent)}
       都立産業貿易センター 台東館 4階
       <small>〒111-0033 東京都台東区花川戸2-6-5</small>
     </p>
+
+    <!-- 面積1400㎡（前回200㎡の7倍）・来場2000人以上想定・70サークル出展目標。
+         ただし数字はサイトに出さない方針（えのもとさん・2026/9/9）。
+         想定値・目標値であって実績ではないため、規模は言葉で伝える -->
+    <p class="catch"><span>過去2回の大盛況におこたえして、</span><em>これまでにない広さの会場へ。</em></p>
 
     <p class="lead">医療をテーマに、個性豊かな雑貨やアクセサリーが大集合するクリエイティブマーケット。</p>
 
