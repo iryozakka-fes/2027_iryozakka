@@ -153,11 +153,15 @@ img{max-width:100%}
    花だと分かる。これ以下だと白い花びらしか見えず、ただの塊に見える。 */
 .fb{z-index:0}
 /* 上辺・下辺からは覗かせない（上は間延びして見え、下は人だかりと競合する）。
-   左右にだけ、高さをばらして並べる。 */
-.fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:34%;left:calc(var(--w) * -.58);transform:rotate(-14deg)}
-.fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:50%;right:calc(var(--w) * -.58);transform:rotate(20deg)}
-.fb3{--w:clamp(84px,12vw,210px);width:var(--w);top:68%;left:calc(var(--w) * -.58);transform:rotate(26deg)}
-.fb4{--w:clamp(92px,13vw,230px);width:var(--w);top:16%;right:calc(var(--w) * -.58);transform:rotate(-22deg)}
+   左右にだけ、高さをばらして並べる。手前の花（f1 上-6% / f2 上14% /
+   f5 下端）と高さが重ならないように配置すること。
+
+   はみ出し量は1輪ずつ変えている。全部を同じ値にすると黄色い芯が横一列に
+   同じ距離で並んで、規則的すぎて気持ち悪くなる。0.5を切ると芯が隠れる。 */
+.fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:34%;left:calc(var(--w) * -.54);transform:rotate(-14deg)}
+.fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:50%;right:calc(var(--w) * -.76);transform:rotate(20deg)}
+.fb3{--w:clamp(84px,12vw,210px);width:var(--w);top:68%;left:calc(var(--w) * -.66);transform:rotate(26deg)}
+.fb4{--w:clamp(92px,13vw,230px);width:var(--w);top:76%;right:calc(var(--w) * -.51);transform:rotate(-22deg)}
 
 /* ざぶとんの中に置く小花。
    .cushion が z-index で積み重ねの文脈を作っているので、z-index:-1 にすると
