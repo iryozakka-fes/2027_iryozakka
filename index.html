@@ -123,7 +123,11 @@ img{max-width:100%}
 /* 絵によって体型のデフォルメ具合が違い、同じ高さに揃えると頭身の低いものだけ
    大きく見える。--s で個別に倍率をかけて、見た目の背丈を揃える。 */
 .crowd img{display:block;width:auto;height:calc(var(--fig-h) * var(--s,1))}
-.crowd .s-chibicos{--s:.6}  /* 頭が大きく体が短いので、隣の子供と同じ背丈に落とす */
+/* 隣の mamatoko の子供と頭の高さを合わせた値。
+   両画像の「頭のてっぺんが画像高さの何%か」を実測して算出している
+   （mamatoko の子供 47.8% / chibicos の医師 35.3% → 下端を揃えると 0.81）。
+   絵の枠の高さで揃えても、腕や聴診器を上げているぶん頭の位置はズレる。 */
+.crowd .s-chibicos{--s:.81}
 .crowd .piosun{
   height:var(--pio-h);
   filter:drop-shadow(0 8px 14px rgba(48,78,76,.18));
@@ -148,11 +152,12 @@ img{max-width:100%}
    ずれて比率が崩れる）。58%出すと花の中心＝黄色い芯がざぶとんの外に来て、
    花だと分かる。これ以下だと白い花びらしか見えず、ただの塊に見える。 */
 .fb{z-index:0}
-.fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:36%;left:calc(var(--w) * -.58);transform:rotate(-14deg)}
-.fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:52%;right:calc(var(--w) * -.58);transform:rotate(20deg)}
-/* 上辺からも覗かせて、左右だけでなく上下からも囲まれている感じにする */
-.fb3{--w:clamp(76px,11vw,190px);width:var(--w);top:calc(var(--w) * -.58);left:30%;transform:rotate(-28deg)}
-.fb4{--w:clamp(70px,10vw,170px);width:var(--w);bottom:calc(var(--w) * -.5);right:26%;transform:rotate(24deg)}
+/* 上辺・下辺からは覗かせない（上は間延びして見え、下は人だかりと競合する）。
+   左右にだけ、高さをばらして並べる。 */
+.fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:34%;left:calc(var(--w) * -.58);transform:rotate(-14deg)}
+.fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:50%;right:calc(var(--w) * -.58);transform:rotate(20deg)}
+.fb3{--w:clamp(84px,12vw,210px);width:var(--w);top:68%;left:calc(var(--w) * -.58);transform:rotate(26deg)}
+.fb4{--w:clamp(92px,13vw,230px);width:var(--w);top:16%;right:calc(var(--w) * -.58);transform:rotate(-22deg)}
 
 /* ざぶとんの中に置く小花。
    .cushion が z-index で積み重ねの文脈を作っているので、z-index:-1 にすると
