@@ -58,13 +58,32 @@ img{max-width:100%}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
 
 
+/* ---------- アイコンの帯 ----------
+   ヘッダーとフッターのクリーム地に横一列で流す。ざぶとんの中を静かに保ったまま
+   賑やかさだけを足し、上下で挟んで額縁にする役目。
+   並び順は医療と雑貨を交互（注射器→ノート→目薬→マグ→絆創膏→鉛筆→クリップ）。
+   絵の縦横比がばらばらなので、正方形の枠に contain で収めて歩調を揃えている。
+   ロゴ内の「医」「ざ」と「×（絆創膏の交差）」は、すぐ下の大きなロゴと
+   重複するため帯には入れない。 */
+.iconband{
+  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
+  gap:clamp(14px,3.2vw,46px);
+  padding:calc(var(--gutter) * .82) 20px;
+}
+.iconband img{
+  display:block;
+  width:clamp(30px,4.2vw,54px);height:clamp(30px,4.2vw,54px);
+  object-fit:contain;
+}
+
 /* ---------- グラデのざぶとん ----------
    ヘッダー・フッター以外＝コンテンツ全部がこの上に乗る。
    .wrap の860px制限の外に出して、画面幅の88%まで広げている。 */
 .mv{
   position:relative;
   width:min(88vw,1240px);
-  margin:var(--gutter) auto 0;
+  /* 人だかりは絶対配置でレイアウト高さに入らないため、はみ出す量ぶんを下に確保する */
+  margin:0 auto var(--hang);
   /* 下端に並ぶ面々の高さ。ざぶとんの下余白をこの値から計算するので、
      ここを変えるだけで中身と被らないまま大きさを調整できる */
   /* ぴおすんと人物の大きさの差が、そのまま画の主役・脇役の差になる。
@@ -173,7 +192,7 @@ img{max-width:100%}
 }
 
 /* ---------- フッター ---------- */
-footer{margin-top:var(--gutter);padding:34px 20px 48px;text-align:center;font-size:13px;color:var(--ink-soft)}
+footer{margin-top:0;padding:34px 20px 48px;text-align:center;font-size:13px;color:var(--ink-soft)}
 .sns{display:flex;gap:14px;justify-content:center;margin:0 0 20px;padding:0;list-style:none}
 .sns a{
   width:48px;height:48px;border-radius:16px;
@@ -186,6 +205,16 @@ footer a.txt{color:var(--accent)}
 </style>
 </head>
 <body>
+
+<div class="iconband" aria-hidden="true">
+  <img src="img/icon/syringe.png" alt="">
+  <img src="img/icon/notebook.png" alt="">
+  <img src="img/icon/eyedrops.png" alt="">
+  <img src="img/icon/mug.png" alt="">
+  <img src="img/icon/bandage.png" alt="">
+  <img src="img/icon/pencil.png" alt="">
+  <img src="img/icon/clips.png" alt="">
+</div>
 
 <main class="mv">
   <div class="cushion">
@@ -233,6 +262,16 @@ footer a.txt{color:var(--accent)}
   <img class="flower f4" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
   <img class="flower f5" src="img/art/margaret-white.png" alt="" aria-hidden="true">
 </main>
+
+<div class="iconband" aria-hidden="true">
+  <img src="img/icon/clips.png" alt="">
+  <img src="img/icon/pencil.png" alt="">
+  <img src="img/icon/bandage.png" alt="">
+  <img src="img/icon/mug.png" alt="">
+  <img src="img/icon/eyedrops.png" alt="">
+  <img src="img/icon/notebook.png" alt="">
+  <img src="img/icon/syringe.png" alt="">
+</div>
 
 <footer>
   <ul class="sns">
