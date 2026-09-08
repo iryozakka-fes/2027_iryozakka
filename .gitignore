@@ -1,0 +1,7 @@
+# 確認用ローカルサーバー設定（Claude Codeのプレビュー用・サイト本体ではない）
+.claude/
+
+# OS/エディタが勝手に作るファイル
+Thumbs.db
+desktop.ini
+.DS_Store
