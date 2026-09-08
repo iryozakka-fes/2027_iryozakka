@@ -140,11 +140,13 @@ img{max-width:100%}
 .f2{width:clamp(72px,9vw,150px);top:14%;right:-6%}
 .f5{width:clamp(88px,11vw,180px);bottom:-9%;left:-5%}
 
-/* ざぶとんの背面から両端に覗く大輪。大半はざぶとんに隠れ、縁だけが見える。
-   手前の3輪が角にいるので、こちらは中腹に置いて高さをずらす。 */
+/* ざぶとんの背面から両端に覗く大輪。手前の3輪が角にいるので中腹に置く。
+   はみ出す量は自分の幅を基準に計算する（画面幅の%でやると花の大きさと
+   ずれて比率が崩れる）。58%出すと花の中心＝黄色い芯がざぶとんの外に来て、
+   花だと分かる。これ以下だと白い花びらしか見えず、ただの塊に見える。 */
 .fb{z-index:0}
-.fb1{width:clamp(110px,17vw,300px);top:36%;left:-7%}
-.fb2{width:clamp(120px,18vw,320px);top:52%;right:-7%}
+.fb1{--w:clamp(110px,17vw,300px);width:var(--w);top:36%;left:calc(var(--w) * -.58)}
+.fb2{--w:clamp(120px,18vw,320px);width:var(--w);top:52%;right:calc(var(--w) * -.58)}
 
 @media (max-width:560px){
   /* 狭い画面は人が横幅いっぱいに並び左下に空きコーナーが無いので、左下を落とす */
