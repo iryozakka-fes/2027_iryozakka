@@ -8,3 +8,7 @@ desktop.ini
 
 # 印刷解像度の元画像（Web用に縮小したものが img/art/ にある。原本はGoogleドライブ）
 _assets-original/
+
+# 帯の再生成スクリプト用（tools/build-strip.mjs で使う sharp）
+node_modules/
+package-lock.json
