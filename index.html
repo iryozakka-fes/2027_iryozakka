@@ -116,7 +116,10 @@ img{max-width:100%}
   pointer-events:none;
   z-index:3; /* 花より前。人物が花に隠れないように */
 }
-.crowd img{display:block;width:auto;height:var(--fig-h)}
+/* 絵によって体型のデフォルメ具合が違い、同じ高さに揃えると頭身の低いものだけ
+   大きく見える。--s で個別に倍率をかけて、見た目の背丈を揃える。 */
+.crowd img{display:block;width:auto;height:calc(var(--fig-h) * var(--s,1))}
+.crowd .s-chibicos{--s:.6}  /* 頭が大きく体が短いので、隣の子供と同じ背丈に落とす */
 .crowd .piosun{
   height:var(--pio-h);
   filter:drop-shadow(0 8px 14px rgba(48,78,76,.18));
@@ -243,7 +246,7 @@ footer a.txt{color:var(--accent)}
   <div class="crowd" aria-hidden="true">
     <img class="fig-extra" src="img/art/helpmark.png" alt="">
     <img src="img/art/mamatoko.png" alt="">
-    <img src="img/art/chibicos.png" alt="">
+    <img class="s-chibicos" src="img/art/chibicos.png" alt="">
     <img class="piosun" src="img/piosun.png" alt="マスコットのぴおすん">
     <img src="img/art/hiyorinmioshin.png" alt="">
     <img src="img/art/pregnant-pair.png" alt="">
