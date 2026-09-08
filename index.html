@@ -95,6 +95,7 @@ img{max-width:100%}
   --hang:clamp(22px,2.6vw,38px);    /* ざぶとんの下端から外へはみ出す量 */
 }
 .cushion{
+  position:relative;z-index:1; /* 背面のマーガレット(.fb*)より前に置く */
   background:linear-gradient(100deg,var(--grad-l) 0%,var(--grad-c) 52%,var(--grad-r) 100%);
   border-radius:clamp(28px,3.4vw,48px);
   padding:clamp(46px,6vw,88px) clamp(24px,5vw,72px);
@@ -138,6 +139,13 @@ img{max-width:100%}
 .f3{width:clamp(56px,7vw,112px);top:44%;left:-4%;opacity:.6}   /* 奥 */
 .f4{width:clamp(64px,8vw,128px);bottom:16%;right:-5%;opacity:.65} /* 奥 */
 .f5{width:clamp(88px,11vw,180px);bottom:-9%;left:-5%;opacity:1}
+
+/* ざぶとんの背面から両端に覗く大輪。手前の5輪とは別のレイヤーになるので
+   奥行きがもう一段増える。大半はざぶとんに隠れ、はみ出した縁だけが見える。 */
+.fb{z-index:0}
+.fb1{width:clamp(150px,24vw,420px);top:16%;left:-11%}
+.fb2{width:clamp(170px,27vw,460px);bottom:4%;right:-12%}
+
 @media (max-width:560px){
   /* 狭い画面は人が横幅いっぱいに並び左下に空きコーナーが無いので、奥の2輪と左下を落とす */
   .f3,.f4,.f5{display:none}
@@ -241,7 +249,7 @@ footer a.txt{color:var(--accent)}
          規模は言葉で伝える。
          「これまでにない」等の最上級は、2回しか実績がないのに歴史を盛って
          聞こえるため使わない -->
-    <p class="catch"><span>過去2回の大盛況におこたえして、</span><em>会場がぐんと広くなりました。</em></p>
+    <p class="catch"><span>過去2回の大盛況におこたえして、</span><em>会場がぐんと広くなりました！</em></p>
 
     <p class="lead">医療をテーマに、個性豊かな雑貨やアクセサリーが大集合するクリエイティブマーケット。</p>
 
@@ -261,6 +269,9 @@ footer a.txt{color:var(--accent)}
     <img src="img/art/pregnant-pair.png" alt="">
     <img class="fig-extra" src="img/art/n-doc.png" alt="">
   </div>
+
+  <img class="flower fb fb1" src="img/art/margaret-white.png" alt="" aria-hidden="true">
+  <img class="flower fb fb2" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
 
   <img class="flower f1" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
   <img class="flower f2" src="img/art/margaret-white.png" alt="" aria-hidden="true">
