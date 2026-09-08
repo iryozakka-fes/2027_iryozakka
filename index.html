@@ -59,22 +59,24 @@ img{max-width:100%}
 
 
 /* ---------- アイコンの帯 ----------
-   ヘッダーとフッターのクリーム地に横一列で流す。ざぶとんの中を静かに保ったまま
-   賑やかさだけを足し、上下で挟んで額縁にする役目。
+   ページの一番上と一番下に敷いて、全体を上下から挟む。
+   ざぶとんの中を静かに保ったまま賑やかさだけを足す役目。
    並び順は医療と雑貨を交互（注射器→ノート→目薬→マグ→絆創膏→鉛筆→クリップ）。
-   絵の縦横比がばらばらなので、正方形の枠に contain で収めて歩調を揃えている。
    ロゴ内の「医」「ざ」と「×（絆創膏の交差）」は、すぐ下の大きなロゴと
-   重複するため帯には入れない。 */
+   重複するため帯には入れない。
+
+   個々の img を並べるとアイコンが点在するだけで帯にならないため、
+   7点を1枚に合成した strip.png を横方向にリピートさせている。
+   画面幅がいくつでも途切れず、密度も出る。
+   アイコンを差し替えるときは strip.png を作り直す（合成スクリプトは
+   sharp で height=120px・間隔26px・両端は半分の13pxとして繋ぎ目を揃えている）。 */
 .iconband{
-  display:flex;justify-content:center;align-items:center;flex-wrap:wrap;
-  gap:clamp(14px,3.2vw,46px);
-  padding:calc(var(--gutter) * .82) 20px;
+  height:clamp(42px,5.4vw,68px);
+  background:url("img/icon/strip.png") repeat-x center center;
+  background-size:auto 100%;
 }
-.iconband img{
-  display:block;
-  width:clamp(30px,4.2vw,54px);height:clamp(30px,4.2vw,54px);
-  object-fit:contain;
-}
+.iconband--top{margin:calc(var(--gutter) * .7) 0}
+.iconband--bottom{margin:calc(var(--gutter) * .6) 0 calc(var(--gutter) * .7)}
 
 /* ---------- グラデのざぶとん ----------
    ヘッダー・フッター以外＝コンテンツ全部がこの上に乗る。
@@ -206,15 +208,7 @@ footer a.txt{color:var(--accent)}
 </head>
 <body>
 
-<div class="iconband" aria-hidden="true">
-  <img src="img/icon/syringe.png" alt="">
-  <img src="img/icon/notebook.png" alt="">
-  <img src="img/icon/eyedrops.png" alt="">
-  <img src="img/icon/mug.png" alt="">
-  <img src="img/icon/bandage.png" alt="">
-  <img src="img/icon/pencil.png" alt="">
-  <img src="img/icon/clips.png" alt="">
-</div>
+<div class="iconband iconband--top" role="presentation"></div>
 
 <main class="mv">
   <div class="cushion">
@@ -263,16 +257,6 @@ footer a.txt{color:var(--accent)}
   <img class="flower f5" src="img/art/margaret-white.png" alt="" aria-hidden="true">
 </main>
 
-<div class="iconband" aria-hidden="true">
-  <img src="img/icon/clips.png" alt="">
-  <img src="img/icon/pencil.png" alt="">
-  <img src="img/icon/bandage.png" alt="">
-  <img src="img/icon/mug.png" alt="">
-  <img src="img/icon/eyedrops.png" alt="">
-  <img src="img/icon/notebook.png" alt="">
-  <img src="img/icon/syringe.png" alt="">
-</div>
-
 <footer>
   <ul class="sns">
     <li><a href="https://x.com/iryozakka/" target="_blank" rel="noopener" aria-label="X（旧Twitter）">
@@ -285,6 +269,8 @@ footer a.txt{color:var(--accent)}
   <p>お問い合わせは<a class="txt" href="https://docs.google.com/forms/d/e/1FAIpQLScUbvO0yb34Qv_qPa60qianzuQfys06qYAr0XIB7t0WN9ieNw/viewform?usp=sharing" target="_blank" rel="noopener">お問合せフォーム</a>から</p>
   <p>医療×ざっかふぇす実行委員会</p>
 </footer>
+
+<div class="iconband iconband--bottom" role="presentation"></div>
 
 </body>
 </html>
