@@ -131,24 +131,24 @@ img{max-width:100%}
 }
 
 /* ---------- マーガレット ----------
-   2026のメインビジュアルと同じ使い方。四隅に置き、あえて画面の外へ切って
-   奥行きを出す。手前は大きく濃く、奥は小さく薄く。 */
+   2026のメインビジュアルと同じ使い方。あえて画面の外へ切って奥行きを出す。
+   奥行きは不透明度ではなく、ざぶとんの手前か背面かの前後関係で作っている。 */
 .flower{position:absolute;pointer-events:none;height:auto;z-index:2}
-.f1{width:clamp(96px,13vw,210px);top:-6%;left:-7%;opacity:1}
-.f2{width:clamp(72px,9vw,150px);top:14%;right:-6%;opacity:1}
-.f3{width:clamp(56px,7vw,112px);top:44%;left:-4%;opacity:.6}   /* 奥 */
-.f4{width:clamp(64px,8vw,128px);bottom:16%;right:-5%;opacity:.65} /* 奥 */
-.f5{width:clamp(88px,11vw,180px);bottom:-9%;left:-5%;opacity:1}
+/* 手前は角に3輪だけ。かつては薄い2輪を中腹に置いて奥行きを作っていたが、
+   背面の大輪がその役を引き継いだので廃止した（同じ側に花が寄って団子になる） */
+.f1{width:clamp(96px,13vw,210px);top:-6%;left:-7%}
+.f2{width:clamp(72px,9vw,150px);top:14%;right:-6%}
+.f5{width:clamp(88px,11vw,180px);bottom:-9%;left:-5%}
 
-/* ざぶとんの背面から両端に覗く大輪。手前の5輪とは別のレイヤーになるので
-   奥行きがもう一段増える。大半はざぶとんに隠れ、はみ出した縁だけが見える。 */
+/* ざぶとんの背面から両端に覗く大輪。大半はざぶとんに隠れ、縁だけが見える。
+   手前の3輪が角にいるので、こちらは中腹に置いて高さをずらす。 */
 .fb{z-index:0}
-.fb1{width:clamp(150px,24vw,420px);top:16%;left:-11%}
-.fb2{width:clamp(170px,27vw,460px);bottom:4%;right:-12%}
+.fb1{width:clamp(110px,17vw,300px);top:36%;left:-7%}
+.fb2{width:clamp(120px,18vw,320px);top:52%;right:-7%}
 
 @media (max-width:560px){
-  /* 狭い画面は人が横幅いっぱいに並び左下に空きコーナーが無いので、奥の2輪と左下を落とす */
-  .f3,.f4,.f5{display:none}
+  /* 狭い画面は人が横幅いっぱいに並び左下に空きコーナーが無いので、左下を落とす */
+  .f5{display:none}
 }
 
 /* ---------- ざぶとんの中身 ---------- */
@@ -275,8 +275,6 @@ footer a.txt{color:var(--accent)}
 
   <img class="flower f1" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
   <img class="flower f2" src="img/art/margaret-white.png" alt="" aria-hidden="true">
-  <img class="flower f3" src="img/art/margaret-white.png" alt="" aria-hidden="true">
-  <img class="flower f4" src="img/art/margaret-orange.png" alt="" aria-hidden="true">
   <img class="flower f5" src="img/art/margaret-white.png" alt="" aria-hidden="true">
 </main>
 
