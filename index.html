@@ -101,6 +101,13 @@ img{max-width:100%}
 }
 .cushion{
   position:relative;z-index:1; /* 背面のマーガレット(.fb*)より前に置く */
+  /* 【既知の問題】左半分（青緑→黄色）で彩度が 58 → 43 まで落ち、くすんで見える。
+     青緑(色相176°)と淡い黄色(50°)は色相環で離れているため、2色を直線で結ぶと
+     中性軸＝灰色の近くを通るため。
+     色空間を oklab に変えても直らないことを実測で確認済み（彩度44 対 43でほぼ同じ）。
+     直線で結ぶこと自体は変わらないので通り道が同じになる。
+     解決するには間に緑を1色挟んで通り道を曲げる必要があるが、それはトンマナで
+     決めた3色に4色目を足す判断になるため保留中。 */
   background:linear-gradient(100deg,var(--grad-l) 0%,var(--grad-c) 52%,var(--grad-r) 100%);
   border-radius:clamp(28px,3.4vw,48px);
   padding:clamp(46px,6vw,88px) clamp(24px,5vw,72px);
@@ -182,6 +189,24 @@ img{max-width:100%}
 }
 
 /* ---------- ざぶとんの中身 ---------- */
+/* グラデの上に文字が乗るので、白い縁で地から浮かせる。
+   ロゴ自体が白い太縁を持っているので、字面の作りも揃う。
+   paint-order で塗りを縁の上に描くため、縁をつけても文字は痩せない。
+   太さは em 指定にして、文字サイズが変わっても比率が保たれるようにしている
+   （px固定だと、小さい文字だけ縁に食われて読みにくくなる）。 */
+.cushion .badge,
+.cushion .date,
+.cushion .venue,
+.cushion .catch,
+.cushion .lead{
+  paint-order:stroke fill;
+  -webkit-text-stroke:.11em #fff;
+}
+/* 小さい文字は相対的に縁が効きすぎるので控えめに */
+.cushion .lead,
+.cushion .venue small{-webkit-text-stroke-width:.09em}
+
+
 /* 日付はロゴの真下。2025の hero と同じ並びで、書体は丸ゴシック */
 .date{
   font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
