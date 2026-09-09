@@ -200,6 +200,32 @@ img{max-width:100%}
 .fs1{width:clamp(44px,5vw,86px);top:62%;left:4%;transform:rotate(-16deg)}
 .fs2{width:clamp(38px,4.4vw,74px);top:74%;right:5%;transform:rotate(22deg)}
 
+/* ---------- 舞う花びら ----------
+   しずく形。横長を基本にしている（縦長だと風にひらひらしている感じにならない）。
+   大きさは3倍以上の差をつけてある。全部同じ大きさだと模様になってしまう。
+   z-index:-1 でグラデの上・文字の下に入るので、何枚散らしても可読性は落ちない。
+   ざぶとんと同じ角丸で切り抜いて、外にはみ出さないようにしている。 */
+.petals{
+  position:absolute;inset:0;z-index:-1;pointer-events:none;
+  overflow:hidden;border-radius:clamp(28px,3.4vw,48px);
+}
+.petals span{
+  position:absolute;display:block;background:#fff;opacity:var(--o);
+  width:var(--w);height:calc(var(--w) * .58);
+  border-radius:50% 50% 50% 0;
+  transform:rotate(var(--r));
+  animation:petal-drift var(--d) ease-in-out infinite alternate;
+  animation-delay:var(--dl);
+}
+@keyframes petal-drift{
+  from{transform:rotate(var(--r))}
+  to{transform:rotate(calc(var(--r) + 22deg)) translate(10px,-8px)}
+}
+/* 動きを控える設定の人には止める。医療テーマのイベントなので特に配慮する */
+@media (prefers-reduced-motion:reduce){
+  .petals span{animation:none}
+}
+
 @media (max-width:560px){
   /* 狭い画面は人が横幅いっぱいに並び左下に空きコーナーが無いので、左下を落とす */
   .f5{display:none}
@@ -256,7 +282,9 @@ img{max-width:100%}
   margin:clamp(28px,3.6vw,42px) auto 0;
   padding:12px 24px;border-radius:16px;
   background:var(--accent);color:#fff;text-decoration:none;
-  font-size:clamp(17px,4.6vw,24px);line-height:1.5;
+  /* キャッチ(最大32px)に近すぎて主張が強かったので下げた。ボタンは1つしか
+     ないので、大きくしなくても押す先は迷わない */
+  font-size:clamp(16px,3.4vw,20px);line-height:1.5;
   transition:background-color .15s ease;
 }
 .btn:hover,.btn:focus-visible{background:var(--accent-sh)}
@@ -308,6 +336,35 @@ footer a.txt{color:var(--accent)}
 
 <main class="mv">
   <div class="cushion">
+    <!-- 舞う花びら。位置・大きさ・角度・濃さ・速さを1枚ずつ指定している。
+         枚数を増減するときはここを足し引きするだけでよい -->
+    <div class="petals" aria-hidden="true">
+    <span style="left:6%;top:12%;--w:16.8px;--r:-18deg;--o:0.9;--d:7s;--dl:-0.0s"></span>
+    <span style="left:18%;top:34%;--w:9.6px;--r:28deg;--o:0.7;--d:8s;--dl:-0.6s"></span>
+    <span style="left:11%;top:62%;--w:24.0px;--r:-6deg;--o:0.85;--d:9s;--dl:-1.2s"></span>
+    <span style="left:24%;top:78%;--w:9.6px;--r:52deg;--o:0.6;--d:10s;--dl:-1.8s"></span>
+    <span style="left:33%;top:18%;--w:12.0px;--r:12deg;--o:0.75;--d:11s;--dl:-2.4s"></span>
+    <span style="left:41%;top:52%;--w:9.6px;--r:-34deg;--o:0.65;--d:12s;--dl:-3.0s"></span>
+    <span style="left:47%;top:86%;--w:31.2px;--r:20deg;--o:0.9;--d:13s;--dl:-3.6s"></span>
+    <span style="left:56%;top:26%;--w:9.6px;--r:44deg;--o:0.6;--d:7s;--dl:-4.2s"></span>
+    <span style="left:63%;top:66%;--w:14.4px;--r:-12deg;--o:0.8;--d:8s;--dl:-4.8s"></span>
+    <span style="left:71%;top:14%;--w:9.6px;--r:24deg;--o:0.7;--d:9s;--dl:-5.4s"></span>
+    <span style="left:78%;top:44%;--w:26.4px;--r:-22deg;--o:0.88;--d:10s;--dl:-6.0s"></span>
+    <span style="left:84%;top:72%;--w:9.6px;--r:38deg;--o:0.62;--d:11s;--dl:-6.6s"></span>
+    <span style="left:90%;top:30%;--w:14.4px;--r:8deg;--o:0.75;--d:12s;--dl:-7.2s"></span>
+    <span style="left:95%;top:58%;--w:9.6px;--r:-42deg;--o:0.6;--d:13s;--dl:-7.8s"></span>
+    <span style="left:15%;top:90%;--w:12.0px;--r:16deg;--o:0.7;--d:7s;--dl:-8.4s"></span>
+    <span style="left:37%;top:6%;--w:9.6px;--r:-30deg;--o:0.65;--d:8s;--dl:-9.0s"></span>
+    <span style="left:68%;top:92%;--w:21.6px;--r:32deg;--o:0.82;--d:9s;--dl:-9.6s"></span>
+    <span style="left:88%;top:8%;--w:12.0px;--r:-10deg;--o:0.72;--d:10s;--dl:-10.2s"></span>
+    <span style="left:52%;top:10%;--w:9.6px;--r:46deg;--o:0.58;--d:11s;--dl:-10.8s"></span>
+    <span style="left:28%;top:50%;--w:9.6px;--r:-38deg;--o:0.6;--d:12s;--dl:-11.4s"></span>
+    <span style="left:59%;top:44%;--w:9.6px;--r:18deg;--o:0.62;--d:13s;--dl:-12.0s"></span>
+    <span style="left:80%;top:20%;--w:9.6px;--r:-26deg;--o:0.6;--d:7s;--dl:-12.6s"></span>
+    <span style="left:44%;top:70%;--w:16.8px;--r:36deg;--o:0.78;--d:8s;--dl:-13.2s"></span>
+    <span style="left:8%;top:44%;--w:9.6px;--r:14deg;--o:0.62;--d:9s;--dl:-13.8s"></span>
+    </div>
+
     <img class="logo" src="img2027/logo-2027.png" alt="医療×ざっかふぇす 2027" width="1855" height="545">
 
     <p class="badge">第3回 開催決定</p>
