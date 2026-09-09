@@ -96,7 +96,7 @@ img{max-width:100%}
   opacity:.85;              /* インクがわずかに透ける */
 }
 .iconband--top{margin-block:calc(var(--gutter) * .7);transform:rotate(-.7deg)}
-.iconband--bottom{margin-block:calc(var(--gutter) * .6) calc(var(--gutter) * .7);transform:rotate(.6deg)}
+.iconband--bottom{margin-block:calc(var(--gutter) * .6) calc(var(--gutter) * .7);transform:rotate(.28deg)}
 
 /* ---------- グラデのざぶとん ----------
    ヘッダー・フッター以外＝コンテンツ全部がこの上に乗る。
@@ -134,8 +134,9 @@ img{max-width:100%}
   text-align:center;
 }
 .cushion > *{margin-left:auto;margin-right:auto}
-/* width:100% だと内側幅を左右いっぱいまで埋めて突っ張るので、少し引く */
-.logo{display:block;width:88%;max-width:820px;height:auto}
+/* width:100% だと内側幅を左右いっぱいまで埋めて突っ張るので、少し引く。
+   広い画面では % ではなく max-width のほうが効くので、大きさを変えるときは両方見る */
+.logo{display:block;width:92%;max-width:900px;height:auto}
 
 /* ---------- ざぶとん下端の人だかり ----------
    ぴおすんを中央に、来場者の線画を左右に並べる。
