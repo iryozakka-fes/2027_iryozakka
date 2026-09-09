@@ -76,13 +76,27 @@ img{max-width:100%}
    画面幅がいくつでも途切れず、密度も出る。
    アイコンを差し替えるときは strip.png を作り直す（合成スクリプトは
    sharp で height=120px・間隔26px・両端は半分の13pxとして繋ぎ目を揃えている）。 */
+/* マスキングテープに見せる。効いているのは主に3つ。
+   ・半透明の白 … 下地のクリーム色が透けて、紙のテープが乗っている感じになる
+                  （不透明の白にするとシールに見える）
+   ・わずかな傾き … 手で貼ったので真っすぐではない。0.6〜0.7度で十分伝わる。
+                    傾けるぶん画面幅より広くして、端に三角の隙間ができないようにする
+   ・柄の上下の余白 … テープの縁までモチーフが詰まっていると印刷物に見えない */
 .iconband{
-  height:clamp(42px,5.4vw,68px);
-  background:url("img2027/icon/strip.png") repeat-x center center;
-  background-size:auto 100%;
+  position:relative;
+  height:clamp(50px,6.4vw,80px);
+  width:112%;margin-inline:-6%;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 2px 6px rgba(48,78,76,.10);
 }
-.iconband--top{margin:calc(var(--gutter) * .7) 0}
-.iconband--bottom{margin:calc(var(--gutter) * .6) 0 calc(var(--gutter) * .7)}
+.iconband::before{
+  content:"";position:absolute;inset:0;
+  background:url("img2027/icon/strip.png") repeat-x center center;
+  background-size:auto 58%; /* テープの高さに対する柄の大きさ＝上下の余白 */
+  opacity:.85;              /* インクがわずかに透ける */
+}
+.iconband--top{margin-block:calc(var(--gutter) * .7);transform:rotate(-.7deg)}
+.iconband--bottom{margin-block:calc(var(--gutter) * .6) calc(var(--gutter) * .7);transform:rotate(.6deg)}
 
 /* ---------- グラデのざぶとん ----------
    ヘッダー・フッター以外＝コンテンツ全部がこの上に乗る。
