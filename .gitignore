@@ -12,3 +12,6 @@ _assets-original/
 # 帯の再生成スクリプト用（tools/build-strip.mjs で使う sharp）
 node_modules/
 package-lock.json
+
+# 確認用の単体HTML（tools/build-preview.mjs が生成。本番にはアップしない）
+preview-standalone.html
