@@ -191,18 +191,19 @@ img{max-width:100%}
 }
 .venue{margin:clamp(16px,2vw,24px) 0 0;font-size:clamp(18px,3.8vw,26px);line-height:1.5}
 .venue small{display:block;margin-top:6px;font-size:14px;color:var(--ink-soft)}
-/* キャッチ＝一番言いたいこと。2025サイトで日付の下にタグラインが入っていた位置 */
+/* キャッチ＝今回のニュース。説明文（何のイベントか）の後、ボタンの直前に置く。
+   大きい文字がボタンの真上に来るので、そのままCTAへ押し出す形になる */
 .catch{
   font-family:"M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
   font-weight:800;
-  margin:clamp(26px,3.2vw,40px) auto 0;max-width:26em;
+  margin:clamp(22px,2.6vw,32px) auto 0;max-width:26em;
   /* 下限を20pxにすると狭い画面で「おこたえし／て、」と割れるため17pxまで下げる */
   font-size:clamp(17px,3.4vw,32px);line-height:1.6;
 }
 /* 2行を意図した割り方で固定する（自然折り返しだと語の途中で割れる） */
 .catch span,.catch em{display:block}
 .catch em{font-style:normal;color:var(--accent)}
-.lead{margin:clamp(14px,1.8vw,22px) auto 0;max-width:34em;font-size:clamp(15px,1.9vw,18px);line-height:1.95}
+.lead{margin:clamp(24px,3vw,36px) auto 0;max-width:34em;font-size:clamp(15px,1.9vw,18px);line-height:1.95}
 
 /* ---------- ボタン（2026実測：角丸16px・影なし・480×48 / 24px太字） ---------- */
 .btn{
@@ -279,9 +280,12 @@ footer a.txt{color:var(--accent)}
          規模は言葉で伝える。
          「これまでにない」等の最上級は、2回しか実績がないのに歴史を盛って
          聞こえるため使わない -->
-    <p class="catch"><span>過去2回の大盛況におこたえして、</span><em>会場がぐんと広くなりました！</em></p>
-
+    <!-- 先に「何のイベントか」、そのあと「今回のニュース」。
+         医ざふぇすを知らない人が最初に見たとき、いきなり「過去2回の大盛況」
+         と言われても何の話か分からない。 -->
     <p class="lead">医療をテーマに、個性豊かな雑貨やアクセサリーが大集合するクリエイティブマーケット。</p>
+
+    <p class="catch"><span>過去2回の大盛況におこたえして、</span><em>会場がぐんと広くなりました！</em></p>
 
     <a class="btn" href="https://x.com/iryozakka/" target="_blank" rel="noopener">続報を X で受け取る</a>
 
