@@ -15,3 +15,6 @@ package-lock.json
 
 # 確認用の単体HTML（tools/build-preview.mjs が生成。本番にはアップしない）
 preview-standalone.html
+
+# SNS画像の生成に使うフォント（自動取得・システムには入れない）
+tools/.fonts/
