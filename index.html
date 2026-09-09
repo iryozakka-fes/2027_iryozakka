@@ -40,6 +40,7 @@
   --ink:       #304e4c; /* フォント色 */
   --ink-soft:  #5c7a77; /* 補助文字（--ink の明度を上げた派生色） */
   --grad-l:    #9de5e0; /* ざぶとん左端 青緑パステル */
+  --grad-g:    #cff2c9; /* ざぶとん 青緑と黄色の間の緑（くすみ止め・2026/9/10追加） */
   --grad-c:    #fbf4d0; /* ざぶとん中間 = 背景色 */
   --grad-r:    #ffbdb5; /* ざぶとん右端 コーラルパステル */
   --gutter:    clamp(40px,6vw,72px); /* ざぶとんの上下に残す余白 */
@@ -101,14 +102,17 @@ img{max-width:100%}
 }
 .cushion{
   position:relative;z-index:1; /* 背面のマーガレット(.fb*)より前に置く */
-  /* 【既知の問題】左半分（青緑→黄色）で彩度が 58 → 43 まで落ち、くすんで見える。
-     青緑(色相176°)と淡い黄色(50°)は色相環で離れているため、2色を直線で結ぶと
-     中性軸＝灰色の近くを通るため。
-     色空間を oklab に変えても直らないことを実測で確認済み（彩度44 対 43でほぼ同じ）。
-     直線で結ぶこと自体は変わらないので通り道が同じになる。
-     解決するには間に緑を1色挟んで通り道を曲げる必要があるが、それはトンマナで
-     決めた3色に4色目を足す判断になるため保留中。 */
-  background:linear-gradient(100deg,var(--grad-l) 0%,var(--grad-c) 52%,var(--grad-r) 100%);
+  /* 26%の緑は「くすみ止め」。これが無いと、青緑(色相176°)から淡い黄色(50°)へ
+     直線で繋がるため中性軸＝灰色の近くを通り、左半分の彩度が 58 → 43 まで落ちて
+     くすんで見える。緑を挟んで通り道を曲げると底が 57〜61 に上がる。
+     色空間を oklab に変える案も試したが効果が無かった（彩度44 対 43）。
+     どの色空間でも「2色を直線で結ぶ」以上、通り道は変わらないため。
+     この緑を外すとくすみが戻る。 */
+  background:linear-gradient(100deg,
+    var(--grad-l) 0%,
+    var(--grad-g) 26%,
+    var(--grad-c) 52%,
+    var(--grad-r) 100%);
   border-radius:clamp(28px,3.4vw,48px);
   padding:clamp(46px,6vw,88px) clamp(24px,5vw,72px);
   /* 下端に並ぶ面々のぶんを空ける */
@@ -200,11 +204,12 @@ img{max-width:100%}
 .cushion .catch,
 .cushion .lead{
   paint-order:stroke fill;
-  -webkit-text-stroke:.11em #fff;
+  -webkit-text-stroke:.09em #fff;
 }
-/* 小さい文字は相対的に縁が効きすぎるので控えめに */
-.cushion .lead,
-.cushion .venue small{-webkit-text-stroke-width:.09em}
+/* 大きく太い文字ほど、同じ em でも縁が太く出て強すぎる。日付が一番大きいので
+   一番細くする（em を下げても実寸では他より太い） */
+.cushion .date{-webkit-text-stroke-width:.07em}
+.cushion .catch{-webkit-text-stroke-width:.08em}
 
 
 /* 日付はロゴの真下。2025の hero と同じ並びで、書体は丸ゴシック */
