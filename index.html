@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- M PLUS Rounded 1c は、下の Rounded M+ 2p に無い文字が出たときの受け皿。
      ほぼ同系統の丸ゴシックなので、落ちても見た目が大きく崩れない -->
-<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@700;800&display=swap" rel="stylesheet">
 
 <style>
 /* 日付・キャッチ・バッジに使う丸ゴシック。自家製 Rounded M+ 2p の heavy を、
@@ -34,10 +34,15 @@
        npm install subset-font
        node tools/build-font.mjs
    英数字・ひらがな・カタカナと、日付や募集まわりでよく使う漢字は入れてある。 */
+/* ウェイトは heavy(800)。black(900) も試したが heavy を採った：
+     ・ロゴの「2027」(Fredoka) の線の太さは、字の高さに対して14.6%。
+       PC表示で約9.0px。日付50pxのとき heavy は8.9px でほぼ一致、black は10.6pxで太すぎる。
+       日付はロゴの真下にあり「2027」が縦に2回並ぶので、ここが揃うかどうかが効く
+     ・小さい文字ほど black は字の中の白が潰れる（バッジ23pxでインク密度61%） */
 @font-face{
   font-family:"Rounded Mplus 2p";
-  src:url("img2027/font/rounded-mplus-2p-black-subset.woff2") format("woff2");
-  font-weight:900;
+  src:url("img2027/font/rounded-mplus-2p-heavy-subset.woff2") format("woff2");
+  font-weight:800;
   font-style:normal;
   font-display:swap;
 }
@@ -272,7 +277,7 @@ img{max-width:100%}
 /* 日付はロゴの真下。2025の hero と同じ並びで、書体は丸ゴシック */
 .date{
   font-family:"Rounded Mplus 2p","M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
-  font-weight:900;
+  font-weight:800;
   margin:clamp(14px,2vw,22px) 0 0;color:var(--accent);
   font-size:clamp(28px,5.8vw,50px);line-height:1.3;letter-spacing:.01em;
 }
@@ -282,7 +287,7 @@ img{max-width:100%}
    大きい文字がボタンの真上に来るので、そのままCTAへ押し出す形になる */
 .catch{
   font-family:"Rounded Mplus 2p","M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
-  font-weight:900;
+  font-weight:800;
   margin:clamp(22px,2.6vw,32px) auto 0;max-width:26em;
   /* 下限を20pxにすると狭い画面で「おこたえし／て、」と割れるため17pxまで下げる */
   font-size:clamp(17px,3.4vw,32px);line-height:1.6;
@@ -315,7 +320,7 @@ img{max-width:100%}
   width:fit-content;
   margin:clamp(20px,2.6vw,32px) auto 0;
   font-family:"Rounded Mplus 2p","M PLUS Rounded 1c","Hiragino Maru Gothic ProN",sans-serif;
-  font-weight:900;color:var(--ink);
+  font-weight:800;color:var(--ink);
   font-size:clamp(16px,2.2vw,23px);letter-spacing:.14em;
 }
 .badge::before,.badge::after{

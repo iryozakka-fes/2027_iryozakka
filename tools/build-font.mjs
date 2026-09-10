@@ -1,10 +1,10 @@
 /**
- * 日付・キャッチ・バッジに使う丸ゴシック（Rounded M+ 2p black）を、
+ * 日付・キャッチ・バッジに使う丸ゴシック（Rounded M+ 2p heavy）を、
  * 必要な文字だけに絞ってWebフォント(WOFF2)に書き出す。
  *
  *   npm install subset-font     （初回のみ）
  *   node tools/build-font.mjs
- *   → img2027/font/rounded-mplus-2p-black-subset.woff2
+ *   → img2027/font/rounded-mplus-2p-heavy-subset.woff2
  *
  * 【なぜ絞るのか】
  * 日本語フォントは全文字入りで3.5MB。ティザー1枚にそれは重すぎる。
@@ -27,9 +27,9 @@
 import subsetFont from "subset-font";
 import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from "node:fs";
 
-const SRC = "tools/.fonts/src/rounded-mplus-2p-black.ttf";
+const SRC = "tools/.fonts/src/rounded-mplus-2p-heavy.ttf";
 const OUT_DIR = "img2027/font";
-const OUT = `${OUT_DIR}/rounded-mplus-2p-black-subset.woff2`;
+const OUT = `${OUT_DIR}/rounded-mplus-2p-heavy-subset.woff2`;
 
 if (!existsSync(SRC)) {
   console.error(`元のフォントが無い: ${SRC}`);
