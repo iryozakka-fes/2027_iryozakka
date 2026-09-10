@@ -20,7 +20,10 @@ const cache = new Map();
 const toDataUri = (path) => {
   if (cache.has(path)) return cache.get(path);
   const ext = path.split(".").pop().toLowerCase();
-  const mime = { png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", svg: "image/svg+xml", webp: "image/webp" }[ext];
+  const mime = {
+    png: "image/png", jpg: "image/jpeg", jpeg: "image/jpeg", svg: "image/svg+xml", webp: "image/webp",
+    woff2: "font/woff2", // 自前の丸ゴシックも埋め込む（外部ファイル無しで開けるように）
+  }[ext];
   if (!mime) throw new Error(`未対応の拡張子: ${path}`);
   const uri = `data:${mime};base64,${readFileSync(path).toString("base64")}`;
   cache.set(path, uri);
