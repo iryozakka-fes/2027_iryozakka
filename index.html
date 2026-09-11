@@ -10,9 +10,16 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="医療×ざっかふぇす2027｜2027年5月8日(土)開催決定！">
 <meta property="og:description" content="医療をテーマに個性豊かな雑貨やアクセサリーが大集合するクリエイティブマーケット。第3回は2027年5月8日(土)、都立産業貿易センター台東館にて開催決定。">
-<!-- SNSでシェアされたときの画像。iryozakka.com のトップに置く前提のURL。
-     別の場所に置く場合はここを直す -->
-<meta property="og:image" content="https://iryozakka.com/img2027/logo-2027.png">
+<!-- SNSでシェアされたときの画像。1200x630（各サービスが想定する1.91:1）。
+     これを外すと上下か左右が切られる。透過なし（透明部分を黒く塗る環境があるため）。
+     作り直しは node tools/build-social.mjs → social/ogp-1200x630.png を
+     img2027/ogp/ogp.png にコピー。
+     ※ 置き場所を変えたらこのURLも直すこと（相対パスは効かない） -->
+<meta property="og:image" content="https://iryozakka.com/img2027/ogp/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="医療×ざっかふぇす">
+<meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 
 <!-- 未設置。2026サイトは Google Analytics (G-BKSBYPVXEP) を入れていた。

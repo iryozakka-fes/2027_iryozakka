@@ -187,6 +187,34 @@ const LAYOUTS = {
       { f: "margaret-orange", w: 210, x: 930, y: 1180, r: 26 },
     ],
   },
+
+  /* SNSでシェアされたときに出る画像（og:image）。
+     1200x630 は各サービスが想定している 1.91:1。これを外すと上下か左右が切られる。
+     タイムラインでは幅500px程度に縮んで表示されるので、文字は大きめにし、
+     小さくて読めないものは載せない（住所は省いている）。
+     透過は無し。透明部分は黒く塗られる環境があるため。 */
+  "ogp-1200x630": {
+    W: 1200, H: 630,
+    tapes: [
+      { len: 1800, h: 62, rot: -1.6, x: -300, y: 6, opacity: 0.5 },
+      { len: 1800, h: 56, rot: 1.1, x: -280, y: 566, opacity: 0.42 },
+    ],
+    // 文字は中央の白ざぶとんに乗せ、人だかりはその左右に逃がす
+    panel: { x: 162, top: 152, w: 876, h: 344, radius: 34, alpha: 0.66 },
+    logoW: 430, logoY: 88,
+    badge: { y: 266, size: 22, spacing: 2 },
+    date: { y: 350, size: 62, stroke: 6 },
+    venue: { y: 402, size: 27, stroke: 3 },
+    catch: { y1: 452, y2: null, size: 26, stroke: 3 }, // 横長なので1行だけ
+    crowdMode: "sides",
+    crowd: { baseY: 614, pio: 176, fig: 72, edge: 26 },
+    flowers: [
+      { f: "margaret-orange", w: 190, x: -70, y: -56, r: -8 },
+      { f: "margaret-white", w: 150, x: 1090, y: 40, r: 14 },
+      { f: "margaret-white", w: 210, x: -96, y: 300, r: -14 },
+      { f: "margaret-orange", w: 175, x: 1075, y: 330, r: 20 },
+    ],
+  },
 };
 
 // ---------------------------------------------------------------- 組み立て
@@ -230,26 +258,54 @@ async function build(name, L, { withText }) {
 
   let img = await sharp(Buffer.from(bg)).composite(back).png().toBuffer();
 
-  // 人だかり：下辺いっぱいに広げる。人数を増やして「人が戻ってくる」絵にする
-  const roster = [
-    { f: "art/friends", s: 1 }, { f: "art/mamatoko", s: 1 }, { f: "art/chibicos", s: 0.81 },
-    { f: "art/shopping", s: 1 }, { f: "piosun", s: null }, { f: "art/hiyorinmioshin", s: 1 },
-    { f: "art/pregnant-pair", s: 1 }, { f: "art/helpmark", s: 1 }, { f: "art/n-doc", s: 1 },
-  ];
+  // 人だかり。縦長は下辺いっぱいに広げて「人が戻ってくる」絵にする。
+  // 横長は縦に余裕が無く文字と重なるので、中央は空けて左右の端に寄せる。
+  const roster =
+    L.crowdMode === "sides"
+      ? [
+          { f: "art/mamatoko", s: 1 }, { f: "art/chibicos", s: 0.81 },
+          { f: "piosun", s: null },
+          { f: "art/hiyorinmioshin", s: 1 }, { f: "art/pregnant-pair", s: 1 },
+        ]
+      : [
+          { f: "art/friends", s: 1 }, { f: "art/mamatoko", s: 1 }, { f: "art/chibicos", s: 0.81 },
+          { f: "art/shopping", s: 1 }, { f: "piosun", s: null }, { f: "art/hiyorinmioshin", s: 1 },
+          { f: "art/pregnant-pair", s: 1 }, { f: "art/helpmark", s: 1 }, { f: "art/n-doc", s: 1 },
+        ];
   const figs = [];
   for (const r of roster) {
     const h = r.s === null ? L.crowd.pio : Math.round(L.crowd.fig * r.s);
     const b = await sharp(`${IMG}/${r.f}.png`).resize({ height: h }).toBuffer();
-    figs.push({ b, w: (await sharp(b).metadata()).width, h });
+    figs.push({ b, w: (await sharp(b).metadata()).width, h, pio: r.s === null });
   }
-  const totalW = figs.reduce((s, f) => s + f.w, 0);
-  const gap = Math.round((L.W - totalW) / (figs.length + 1));
   const front = [];
-  let x = gap;
-  for (const f of figs) {
-    const p = await placeAt(f.b, x, L.crowd.baseY - f.h, L.W, L.H);
-    if (p) front.push(p);
-    x += f.w + gap;
+
+  if (L.crowdMode === "sides") {
+    const gap = Math.round(L.crowd.fig * 0.28);
+    const pio = figs.find((f) => f.pio);
+    const others = figs.filter((f) => !f.pio);
+    // 右端にぴおすん、その手前に1人
+    let rx = L.W - pio.w - L.crowd.edge;
+    front.push(await placeAt(pio.b, rx, L.crowd.baseY - pio.h, L.W, L.H));
+    for (const f of others.slice(2)) {
+      rx -= f.w + gap;
+      front.push(await placeAt(f.b, rx, L.crowd.baseY - f.h, L.W, L.H));
+    }
+    // 左端に残り
+    let lx = L.crowd.edge;
+    for (const f of others.slice(0, 2)) {
+      front.push(await placeAt(f.b, lx, L.crowd.baseY - f.h, L.W, L.H));
+      lx += f.w + gap;
+    }
+  } else {
+    const totalW = figs.reduce((s, f) => s + f.w, 0);
+    const gap = Math.round((L.W - totalW) / (figs.length + 1));
+    let x = gap;
+    for (const f of figs) {
+      const p = await placeAt(f.b, x, L.crowd.baseY - f.h, L.W, L.H);
+      if (p) front.push(p);
+      x += f.w + gap;
+    }
   }
 
   // ロゴ
@@ -264,8 +320,8 @@ async function build(name, L, { withText }) {
       ${text({ x: cx, y: b.y, size: b.size, fill: C.ink, family: ROUND, weight: 800, spacing: b.spacing, content: CONTENT.badge })}
       ${text({ x: cx, y: L.date.y, size: L.date.size, fill: C.accent, family: ROUND, weight: 800, stroke: L.date.stroke, content: CONTENT.date })}
       ${text({ x: cx, y: L.venue.y, size: L.venue.size, fill: C.ink, stroke: L.venue.stroke, content: CONTENT.venue })}
-      ${text({ x: cx, y: L.catch.y1, size: L.catch.size, fill: C.ink, family: ROUND, weight: 800, stroke: L.catch.stroke, content: CONTENT.catch1 })}
-      ${text({ x: cx, y: L.catch.y2, size: L.catch.size, fill: C.accent, family: ROUND, weight: 800, stroke: L.catch.stroke, content: CONTENT.catch2 })}
+      ${text({ x: cx, y: L.catch.y1, size: L.catch.size, fill: L.catch.y2 ? C.ink : C.accent, family: ROUND, weight: 800, stroke: L.catch.stroke, content: L.catch.y2 ? CONTENT.catch1 : CONTENT.catch2 })}
+      ${L.catch.y2 ? text({ x: cx, y: L.catch.y2, size: L.catch.size, fill: C.accent, family: ROUND, weight: 800, stroke: L.catch.stroke, content: CONTENT.catch2 }) : ""}
     </svg>`;
     front.push({ input: Buffer.from(svg), top: 0, left: 0 });
   }
@@ -279,5 +335,5 @@ async function build(name, L, { withText }) {
 ensureFont();
 for (const [name, L] of Object.entries(LAYOUTS)) {
   await build(name, L, { withText: true });
-  await build(name, L, { withText: false }); // 文字なしの台紙
+  if (!name.startsWith("ogp")) await build(name, L, { withText: false }); // 文字なしの台紙
 }
