@@ -7,6 +7,7 @@
  * 出力（parts/）
  *   bg-1080x1350.png … 花びら付きのグラデ背景（Instagramフィード用）
  *   bg-1200x675.png  … 同（X用）
+ *   bg-1200x630.png  … 同（OGP用）
  *   bg-1080x1920.png … 同（Instagramストーリーズ用）
  *   tape-3125x140.png … マステ1本。透過なし（白は不透明）
  *
@@ -85,6 +86,7 @@ mkdirSync(OUT, { recursive: true });
 const made = [
   await background(1080, 1350), // Instagram フィード
   await background(1200, 675),  // X
+  await background(1200, 630),  // OGP（SNSでシェアされたとき）
   await background(1080, 1920), // Instagram ストーリーズ
   await tape(),
 ];

@@ -335,5 +335,5 @@ async function build(name, L, { withText }) {
 ensureFont();
 for (const [name, L] of Object.entries(LAYOUTS)) {
   await build(name, L, { withText: true });
-  if (!name.startsWith("ogp")) await build(name, L, { withText: false }); // 文字なしの台紙
+  await build(name, L, { withText: false }); // 文字なしの台紙
 }
