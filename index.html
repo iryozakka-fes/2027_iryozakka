@@ -26,8 +26,23 @@
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 
-<!-- 未設置。2026サイトは Google Analytics (G-BKSBYPVXEP) を入れていた。
-     アクセス数を取るなら、そのタグをここに貼る -->
+<!-- アクセス解析（Google Analytics 4）。2026サイトと同じ計測IDを使っている。
+     年ごとに分けたいときは GA の管理画面で新しいプロパティを作り、下のIDを2か所
+     とも差し替える。逆に同じIDのままなら、GAの「ホスト名」で iryozakka.com と
+     2026.iryozakka.com を切り分けて見られる。
+
+     外部リンク（Xへの導線）のクリックは、GA4の拡張計測機能が既定で拾うので
+     こちらで足すコードは要らない。
+
+     ※ 動いているかは GA の「リアルタイム」で確認できる。サイトを開いて数秒で
+        1人と出れば通っている。出なければ計測IDが違う。 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BKSBYPVXEP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+  gtag("config", "G-BKSBYPVXEP");
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
