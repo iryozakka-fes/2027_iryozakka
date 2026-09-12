@@ -1,0 +1,17 @@
+{
+  "name": "iryozakka-2027",
+  "private": true,
+  "type": "module",
+  "description": "医療×ざっかふぇす2027 ティザーサイト。サイト本体は index.html + img2027/ のみで動く。ここに書いてあるのは tools/ の素材生成スクリプトが使うものだけ。",
+  "scripts": {
+    "font": "node tools/build-font.mjs",
+    "strip": "node tools/build-strip.mjs",
+    "social": "node tools/build-social.mjs",
+    "parts": "node tools/build-parts.mjs",
+    "preview": "node tools/build-preview.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.4",
+    "subset-font": "^2.3.0"
+  }
+}
